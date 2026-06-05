@@ -1,19 +1,12 @@
 package eccomerce;
 
-import java.util.ArrayList;
-
 abstract public class Item {
 	
 	private String 	nombre;
-	private String 	sku;
-	private String 	marca;
+	private String 	descripcion;
 	private String	categoria;
-	private double 	precioBase;
 	private double 	descuentoPromocional;
-	private int 	stock;
-	private ArrayList<Atributo> atributos = new ArrayList<>();
-
-
+	
 
 abstract protected void 	incrementarStock();
 abstract protected void 	incrementarStockEn(int cantidad);
@@ -23,10 +16,19 @@ abstract protected double 	getPrecioFinal();
 abstract protected boolean 	existeAtributoOpcional(String nombreAtributo);
 abstract protected String 	getAtributoOpcional(String nombreAtributo);
 abstract protected boolean 	esItemValido();
-abstract protected String	getNombre();
-abstract protected String	getCategoria();
-abstract protected String	getSKU();
 abstract protected int		getStock();
 abstract protected boolean	hayStock();
 
+protected String getNombre() {
+	return this.nombre;
+}
+protected String getCategoria() {
+	return this.categoria;
+}
+protected String getDescripcion() {
+	return this.descripcion;
+}
+protected double getDescuentoPromocional() {
+	return this.descuentoPromocional;
+}
 }
