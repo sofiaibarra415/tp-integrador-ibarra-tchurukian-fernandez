@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Paquete extends Item {
 	
-	private ArrayList<Item> items = new ArrayList();
+	private ArrayList<Item> items = new ArrayList<>();
 
 	public Paquete(String nombre, String descripcion, String categoria, double descuentoPromocional,ArrayList<Item> items) {
 		super(nombre, descripcion, categoria, descuentoPromocional);
@@ -36,18 +36,6 @@ public class Paquete extends Item {
 
 
 	@Override
-	protected boolean existeAtributoOpcional(String nombreAtributo) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	protected String getAtributoOpcional(String nombreAtributo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	protected boolean esItemValido() {
 		return	this.getCategoria() 	!= null //es un String si no esta cargado es null
 				&& this.getNombre() 	!= null //es un String si no esta cargado es null
@@ -64,7 +52,7 @@ public class Paquete extends Item {
 		return this.items.stream()
 					     .mapToInt(item -> item.getStock())
 					     .min() //me da un optional int
-					     .getAsInt(); //no rompe porque si no se cargo stock java pone un cero
+					     .orElse(0); // por si el paquete esta vacio
 		
 	}
 
@@ -77,8 +65,12 @@ public class Paquete extends Item {
 
 	@Override
 	protected void agregarAtributo(String unNombre, String unValor) {
-		// TODO Auto-generated method stub
 		
+		if (unNombre.equalsIgnoreCase("peso")) {
+			throw new IllegalArgumentException("En un Paquete el peso es la suma de sus Productos, no es un atributo seteable"); //error lanza excepcion
+		}else {
+			super.agregarAtributo(unNombre, unValor);
+		}
 	}
 
 	@Override
@@ -86,7 +78,7 @@ public class Paquete extends Item {
 		
 		return this.items.stream()
 				         .mapToDouble(item -> item.getPeso())
-				         .sum();
+				         .sum(); //recorro recursivamente para sumar los pesos de los productos
 	}
 
 	@Override

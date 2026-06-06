@@ -24,9 +24,6 @@ abstract protected double 	getPrecioBase();
 abstract protected boolean 	esItemValido();
 abstract protected int		getStock();
 abstract protected boolean	hayStock();
-abstract protected void     agregarAtributo(String unNombre, String unValor);
-abstract protected boolean  existeAtributoOpcional(String nombreAtributo);
-abstract protected String   getAtributoOpcional(String nombreAtributo);
 abstract protected boolean  hayPeso();
 
 protected String getNombre() {
@@ -55,6 +52,43 @@ protected double getPeso() {
 
 protected void setPeso(double peso) {
 	this.peso = peso;
+}
+
+protected void agregarAtributo(String unNombre, String unValor) {
+	if (this.existeAtributoOpcional(unNombre)) {
+		throw new IllegalArgumentException("El atributo ya existe"); //error lanza excepcion
+	}
+	this.atributos.add(new Atributo(unNombre, unValor)) ;
+	// si no existe se crea un atributo y se agrega a la lista de atributos dinamicos
+	
+}
+
+protected boolean existeAtributoOpcional(String nombreAtributo) {
+	if (nombreAtributo.equalsIgnoreCase("peso") && this.hayPeso()){
+		return true;
+		
+	}else {
+	return this.getAtributos().stream()
+		    			      .anyMatch(atributo -> atributo.getNombre().equalsIgnoreCase(nombreAtributo) );
+	}
+}
+
+protected String getAtributoOpcional(String nombreAtributo) {
+	if ( ! this.existeAtributoOpcional(nombreAtributo)) {
+		throw new IllegalArgumentException("El atributo no existe"); //error lanza excepcion
+	}
+	
+	if (nombreAtributo.equalsIgnoreCase("peso")){
+		
+		return String.valueOf(this.getPeso());
+		
+	}else {
+	return this.getAtributos().stream()
+			             .filter(atributo -> atributo.getNombre().equalsIgnoreCase(nombreAtributo) ) // filtro para encontrar el atributo
+			             .findFirst()		// deberia haber uno solo, pero por las dudas elijo el primero
+			             .get()				// me da el objeto, si noy falla, se deberia chequear que este el atributo con boolean existeAtributoOpcional(String nombreAtributo) antes de usar 
+			             .getValor();		// me da el valor del atributo
+	}
 }
 
 

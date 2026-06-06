@@ -74,29 +74,8 @@ public class Producto extends Item {
 		return (this.stock > 0);
 	}
 
-	@Override
-	protected boolean existeAtributoOpcional(String nombreAtributo) {
 		
-		return this.getAtributos().stream()
-			    			 .anyMatch(atributo -> atributo.getNombre() == nombreAtributo);
-	}
 	
-	@Override
-	protected String getAtributoOpcional(String nombreAtributo) {
-		return this.getAtributos().stream()
-				             .filter(atributo -> atributo.getNombre() == nombreAtributo) // filtro para encontrar el atributo
-				             .findFirst()		// deberia haber uno solo, pero por las dudas elijo el primero
-				             .get()				// me da el objeto, si noy falla, se deberia chequear que este el atributo con boolean existeAtributoOpcional(String nombreAtributo) antes de usar 
-				             .getValor();		// me da el valor del atributo
-		}
-
-	
-	@Override
-	protected void agregarAtributo(String unNombre, String unValor) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	@Override
 	protected double getPeso() {
 		return super.getPeso();
