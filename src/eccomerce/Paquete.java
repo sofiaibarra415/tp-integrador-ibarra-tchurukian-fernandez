@@ -1,36 +1,39 @@
 package eccomerce;
 
+import java.util.ArrayList;
+
 public class Paquete extends Item {
+	
+	private ArrayList<Item> items = new ArrayList();
+
+	public Paquete(String nombre, String descripcion, String categoria, double descuentoPromocional,ArrayList<Item> items) {
+		super(nombre, descripcion, categoria, descuentoPromocional);
+		this.items = items;
+	}
 
 	@Override
 	protected void incrementarStock() {
-		// TODO Auto-generated method stub
-
+		this.items.forEach(item -> item.incrementarStock());
+		// icrementa todos los productos y si son paquetes es recursiva
 	}
-
-	@Override
-	protected void incrementarStockEn(int cantidad) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	@Override
 	protected void decrementarStock() {
-		// TODO Auto-generated method stub
-
+		this.items.forEach(item -> item.decrementarStock());
+		// decrementa todos los productos y si son paquetes es recursiva
 	}
 
 	@Override
 	protected double getPrecioBase() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.items.stream()
+						 .mapToDouble(item -> item.getPrecioBase())
+						 .sum();
+		//si son productos suma y si son paquetes entra recursivamente a cada paquete anidado
+		//por lo que entendi los descuentos no se anidan
+		//preguntar
+		
 	}
 
-	@Override
-	protected double getPrecioFinal() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	protected boolean existeAtributoOpcional(String nombreAtributo) {
@@ -46,36 +49,54 @@ public class Paquete extends Item {
 
 	@Override
 	protected boolean esItemValido() {
-		// TODO Auto-generated method stub
-		return false;
+		return	this.getCategoria() 	!= null //es un String si no esta cargado es null
+				&& this.getNombre() 	!= null //es un String si no esta cargado es null
+				&& this.getDescripcion()!= null //es un String si no esta cargado es null
+				&& this.getDescuentoPromocional() >= 0  //el decuento tiene que ser cero o mas
+				&& this.getDescuentoPromocional() < 100 //el descuento tiene que ser menor a cien
+				&& this.getAtributos().stream().noneMatch(atributo -> atributo.getValor() == null)
+				&& this.items.stream().allMatch(item -> item.esItemValido()); //recursion
 	}
-
-
-
-	@Override
-	protected String getCategoria() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 
 	@Override
 	protected int getStock() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.items.stream()
+					     .mapToInt(item -> item.getStock())
+					     .min() //me da un optional int
+					     .getAsInt(); //no rompe porque si no se cargo stock java pone un cero
+		
 	}
 
 	@Override
 	protected boolean hayStock() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.items.stream()
+						 .allMatch(item -> item.hayStock());
+		//recorro todo los productos y si es paquete es recursivo
 	}
 
 	@Override
-	protected double getDescuentoPromocional() {
-		// tiene que ser distinta a la superclase porque los descuentos no se suman o si se suman preguntar
-		return 0;
+	protected void agregarAtributo(String unNombre, String unValor) {
+		// TODO Auto-generated method stub
+		
 	}
 
+	@Override
+	protected double getPeso() {
+		
+		return this.items.stream()
+				         .mapToDouble(item -> item.getPeso())
+				         .sum();
+	}
+
+	@Override
+	protected boolean hayPeso() {
+		
+		return this.items.stream()
+				 .allMatch(item -> item.hayPeso());
+       //recorro todo los productos y si es paquete es recursivo;
+	}
+
+
+	
 }

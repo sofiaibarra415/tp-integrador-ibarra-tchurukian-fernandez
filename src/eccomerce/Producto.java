@@ -1,22 +1,29 @@
 package eccomerce;
 
-import java.util.ArrayList;
 
 public class Producto extends Item {
 
-	private String 	sku;
 	private String 	marca;
 	private double 	precioBase;
 	private int 	stock;
-	private ArrayList<Atributo> atributos = new ArrayList<>();
 	
+	
+	private String 	sku;
+	public Producto(String nombre, String descripcion, String categoria, double descuentoPromocional, String sku,
+			String marca, double precioBase, int stock) {
+		super(nombre, descripcion, categoria, descuentoPromocional);
+		this.sku = sku;
+		this.marca = marca;
+		this.precioBase = precioBase;
+		this.stock = stock;
+	}	
 	
 	@Override
 	protected void incrementarStock() {
 		this.stock ++;
 	}
 
-	@Override
+	
 	protected void incrementarStockEn(int cantidad) {
 		this.stock = this.stock + cantidad;
 	}
@@ -31,26 +38,6 @@ public class Producto extends Item {
 		return this.precioBase;
 	}
 
-	@Override
-	protected double getPrecioFinal() {
-		return this.getPrecioBase() * ( 1 - this.getDescuentoPromocional() );
-	}
-
-	@Override
-	protected boolean existeAtributoOpcional(String nombreAtributo) {
-		
-		return this.atributos.stream()
-			    			 .anyMatch(atributo -> atributo.getNombre() == nombreAtributo);
-	}
-
-	@Override
-	protected String getAtributoOpcional(String nombreAtributo) {
-		return this.atributos.stream()
-				             .filter(atributo -> atributo.getNombre().equals(nombreAtributo)) 	// filtro para encontrar el atributo
-				             .findFirst()													  	// deberia haber uno solo, pero por las dudas elijo el primero
-				             .get()															 	// me da el objeto, si noy falla, se deberia chequear que este el atributo con boolean existeAtributoOpcional(String nombreAtributo) antes de usar 
-				             .getValor();														// me da el valor del atributo
-		}
 	
 	@Override
 	protected boolean esItemValido() {
@@ -60,10 +47,13 @@ public class Producto extends Item {
 				&& this.getNombre() 	!= null //es un String si no esta cargado es null
 				&& this.getDescripcion()!= null //es un String si no esta cargado es null
 				&& this.getMarca()		!= null //es un String si no esta cargado es null
-				&& this.getPrecioBase() > 0;    //es el precio tiene que ser un valor positivo, ademas si no esta cargado java le asigna cero
+				&& this.getPrecioBase() > 0     //es el precio tiene que ser un valor positivo, ademas si no esta cargado java le asigna cero
+				&& this.getStock() 		>= 0	//el stock no puede ser negativo, pero si cero
+				&& this.getDescuentoPromocional() >= 0  //el decuento tiene que ser cero o mas
+				&& this.getDescuentoPromocional() < 100 //el descuento tiene que ser menor a cien
+				&& this.getAtributos().stream().noneMatch(atributo -> atributo.getValor() == null);  //cheque que ningun atributo dinamico tiene valor nulo     
 				
 	}
-
 
 	
 	protected String getSKU() {
@@ -85,8 +75,37 @@ public class Producto extends Item {
 	}
 
 	@Override
-	protected double getDescuentoPromocional() {
-		return super.getDescuentoPromocional();
+	protected boolean existeAtributoOpcional(String nombreAtributo) {
+		
+		return this.getAtributos().stream()
+			    			 .anyMatch(atributo -> atributo.getNombre() == nombreAtributo);
+	}
+	
+	@Override
+	protected String getAtributoOpcional(String nombreAtributo) {
+		return this.getAtributos().stream()
+				             .filter(atributo -> atributo.getNombre() == nombreAtributo) // filtro para encontrar el atributo
+				             .findFirst()		// deberia haber uno solo, pero por las dudas elijo el primero
+				             .get()				// me da el objeto, si noy falla, se deberia chequear que este el atributo con boolean existeAtributoOpcional(String nombreAtributo) antes de usar 
+				             .getValor();		// me da el valor del atributo
+		}
+
+	
+	@Override
+	protected void agregarAtributo(String unNombre, String unValor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected double getPeso() {
+		return super.getPeso();
+	}
+
+	@Override
+	protected boolean hayPeso() {
+		
+		return this.getPeso() > 0;
 	}
 
 }
