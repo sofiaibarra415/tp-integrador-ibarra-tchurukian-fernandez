@@ -37,6 +37,11 @@ public class Pedido {
 	public void setEstado(EstadoPedido e) { 
 		this.estado = e; 
 	}
+	
+	public EstadoPedido getEstado() {
+	    return estado;
+	}
+	
 	public List<Item> getItems() { 
 		return items;
 	}
