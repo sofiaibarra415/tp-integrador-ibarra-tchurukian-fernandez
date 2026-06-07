@@ -4,14 +4,14 @@ public class Atributo {
 private String nombre;
 private String valor;
 
-protected Atributo(String unNombre, String unValor) {
+public Atributo(String unNombre, String unValor) {
 	this.nombre = unNombre;
 	this.valor  = unValor;
 }
-protected String getNombre() {
+public String getNombre() {
 	return this.nombre;
 }
-protected String getValor() {
+public String getValor() {
 	return this.valor;
 }
 }

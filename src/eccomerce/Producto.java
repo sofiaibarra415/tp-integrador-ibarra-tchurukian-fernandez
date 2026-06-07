@@ -6,9 +6,8 @@ public class Producto extends Item {
 	private String 	marca;
 	private double 	precioBase;
 	private int 	stock;
-	
-	
 	private String 	sku;
+	
 	public Producto(String nombre, String descripcion, String categoria, double descuentoPromocional, String sku,
 			String marca, double precioBase, int stock) {
 		super(nombre, descripcion, categoria, descuentoPromocional);
@@ -19,28 +18,28 @@ public class Producto extends Item {
 	}	
 	
 	@Override
-	protected void incrementarStock() {
+	public void incrementarStock() {
 		this.stock ++;
 	}
 
 	
-	protected void incrementarStockEn(int cantidad) {
+	public void incrementarStockEn(int cantidad) {
 		this.stock = this.stock + cantidad;
 	}
 
 	@Override
-	protected void decrementarStock() {
+	public void decrementarStock() {
 		this.stock --;
 	}
 
 	@Override
-	protected double getPrecioBase() {
+	public double getPrecioBase() {
 		return this.precioBase;
 	}
 
 	
 	@Override
-	protected boolean esItemValido() {
+	public boolean esItemValido() {
 		
 		return	   this.getSKU() 		!= null //es un String si no esta cargado es null
 				&& this.getCategoria() 	!= null //es un String si no esta cargado es null
@@ -56,33 +55,33 @@ public class Producto extends Item {
 	}
 
 	
-	protected String getSKU() {
+	public String getSKU() {
 		return this.sku;
 	}
 	
-	protected String getMarca() {
+	public String getMarca() {
 		return this.marca;
 	}
 
 	@Override
-	protected int getStock() {
+	public int getStock() {
 		return this.stock;
 	}
 
 	@Override
-	protected boolean hayStock() {
+	public boolean hayStock() {
 		return (this.stock > 0);
 	}
 
 		
 	
 	@Override
-	protected double getPeso() {
+	public double getPeso() {
 		return super.getPeso();
 	}
 
 	@Override
-	protected boolean hayPeso() {
+	public boolean hayPeso() {
 		
 		return this.getPeso() > 0;
 	}

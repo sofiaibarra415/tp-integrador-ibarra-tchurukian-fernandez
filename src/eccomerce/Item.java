@@ -11,59 +11,62 @@ abstract public class Item {
 	private ArrayList<Atributo> atributos = new ArrayList<>();
 	private double peso = 0;	
 
-protected Item(String nombre, String descripcion, String categoria, double descuentoPromocional) {
+public Item(String nombre, String descripcion, String categoria, double descuentoPromocional) {
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.categoria = categoria;
 		this.descuentoPromocional = descuentoPromocional;
 	}
 
-abstract protected void 	incrementarStock();
-abstract protected void 	decrementarStock();
-abstract protected double 	getPrecioBase();
-abstract protected boolean 	esItemValido();
-abstract protected int		getStock();
-abstract protected boolean	hayStock();
-abstract protected boolean  hayPeso();
+abstract public void 	incrementarStock();
+abstract public void 	decrementarStock();
+abstract public double 	getPrecioBase();
+abstract public boolean 	esItemValido();
+abstract public int		getStock();
+abstract public boolean	hayStock();
+abstract public boolean  hayPeso();
 
-protected String getNombre() {
+public String getNombre() {
 	return this.nombre;
 }
-protected String getCategoria() {
+public String getCategoria() {
 	return this.categoria;
 }
-protected String getDescripcion() {
+public String getDescripcion() {
 	return this.descripcion;
 }
-protected double getDescuentoPromocional() {
+public double getDescuentoPromocional() {
 	return this.descuentoPromocional;
 }
-protected double getPrecioFinal() {
+public double getPrecioFinal() {
 	return this.getPrecioBase() * ( 1 - this.getDescuentoPromocional() / 100 );
 }
 
-protected ArrayList<Atributo> getAtributos() {
+public ArrayList<Atributo> getAtributos() {
 	return atributos;
 }
 
-protected double getPeso() {
+public double getPeso() {
 	return peso;
 }
 
-protected void setPeso(double peso) {
+public void setPeso(double peso) {
 	this.peso = peso;
 }
 
-protected void agregarAtributo(String unNombre, String unValor) {
+public void agregarAtributo(String unNombre, String unValor) {
 	if (this.existeAtributoOpcional(unNombre)) {
 		throw new IllegalArgumentException("El atributo ya existe"); //error lanza excepcion
+	}
+	if (unNombre.equalsIgnoreCase("peso")) {
+		this.setPeso(Double.parseDouble(unValor)); //convierto string en double
 	}
 	this.atributos.add(new Atributo(unNombre, unValor)) ;
 	// si no existe se crea un atributo y se agrega a la lista de atributos dinamicos
 	
 }
 
-protected boolean existeAtributoOpcional(String nombreAtributo) {
+public boolean existeAtributoOpcional(String nombreAtributo) {
 	if (nombreAtributo.equalsIgnoreCase("peso") && this.hayPeso()){
 		return true;
 		
@@ -73,7 +76,7 @@ protected boolean existeAtributoOpcional(String nombreAtributo) {
 	}
 }
 
-protected String getAtributoOpcional(String nombreAtributo) {
+public String getAtributoOpcional(String nombreAtributo) {
 	if ( ! this.existeAtributoOpcional(nombreAtributo)) {
 		throw new IllegalArgumentException("El atributo no existe"); //error lanza excepcion
 	}
