@@ -8,41 +8,42 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.YearMonth;
+import java.math.BigDecimal;
 
 class TarjetaDeCreditoTest {
-	// Reloj fijo en el año 2026.
+	// reloj fijo en el año 2026
 	private final Clock relojFijo = Clock.fixed(
 			Instant.parse("2026-06-01T10:00:00Z"), 
 	        ZoneId.of("UTC")
 	);
+	// crea instancia tarjeta con reloj fijo
+	MetodoDePago tarjeta = new TarjetaDeCredito(relojFijo);
 	
 	@Test
 	void validaSinErrores_CuandoDatosSonCorrectos() {
-        // Vence 2035
-        YearMonth vencimientoFuturo = YearMonth.of(2035, 12);
-        
-        TarjetaDeCredito tarjeta = new TarjetaDeCredito(
-            "0011212110305575", 
-            "123", 
-            vencimientoFuturo, 
-            relojFijo
+        // vence 2035
+        DatosTarjetaCredito datos = new DatosTarjetaCredito(
+                "1234567812345678", 
+                "123", 
+                YearMonth.of(2035, 12)
         );
-
-        assertDoesNotThrow(() -> tarjeta.validarDatos());
+        
+        assertDoesNotThrow(() -> tarjeta.procesarPago(datos, new BigDecimal("100.00")));
     }
 	
 	@Test
     void lanzaExcepcion_CuandoTarjetaEstaVencida() {
-        // Venció 2025.
-        YearMonth vencimientoPasado = YearMonth.of(2025, 1);
-        
-        TarjetaDeCredito tarjeta = new TarjetaDeCredito(
-            "0011212110305575", 
-            "123", 
-            vencimientoPasado, 
-            relojFijo
+        // venció 2025
+		DatosTarjetaCredito datos = new DatosTarjetaCredito(
+                "1234567812345678", 
+                "123", 
+                YearMonth.of(2025, 12)
         );
-
-        assertThrows(IllegalArgumentException.class, () -> tarjeta.validarDatos());
+		
+        Exception exception = assertThrows(Exception.class, () -> {
+        	tarjeta.procesarPago(datos, new BigDecimal("100.00"));
+        });
+        
+        assertTrue(exception.getMessage().contains("expirada"));
     }
 }

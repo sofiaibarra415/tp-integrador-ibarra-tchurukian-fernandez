@@ -1,12 +1,25 @@
 package eccomerce;
 
+import java.math.BigDecimal;
+
 public abstract class MetodoDePago {
+
+	public final void procesarPago(DatosPago datos, BigDecimal monto) {
+		
+        validarDatos(datos);
+        
+        reservarFondos(monto);
+        
+        ejecutarTransaccion(monto);
+        
+       // notificarResultado(idTransaccion); ejecutarTransacción() llama esta función
+    }
 	
-	public abstract void validarDatos();
+	protected abstract void validarDatos(DatosPago datos);
 	
-	public abstract void reservarFondos();
+	protected abstract void reservarFondos(BigDecimal monto);
 	
-	public abstract void ejecutarTransaccion();
+	protected abstract void ejecutarTransaccion(BigDecimal monto);
 	
-	public abstract void notificarResultado();
+	protected abstract void notificarResultado(String idTransaccion);
 }
