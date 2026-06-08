@@ -3,7 +3,6 @@ package eccomerce;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
-
 import org.junit.jupiter.api.Test;
 
 import eccomerce.envio.Direccion;
@@ -14,43 +13,52 @@ import eccomerce.envio.RetiroEnSucursal;
 import eccomerce.envio.Sucursal;
 import eccomerce.pedido.Pedido;
 
+import eccomerce.envio.CorreoArgentinaAPI;
+import eccomerce.envio.EnvioExpressAPI;
+
 class MetodoEnvioTest {
 
     private Pedido pedido;
     private Item item;
     private MetodoEnvio envio;
+    private CorreoArgentinaAPI correoMock;
+    private EnvioExpressAPI expressMock;
 
     @BeforeEach
     void setUp() {
         pedido = new Pedido("PED-001");
         item = mock(Item.class);
+        correoMock = mock(CorreoArgentinaAPI.class);
+        expressMock = mock(EnvioExpressAPI.class);
         when(item.getPrecioFinal()).thenReturn(100.0);
         when(item.getPeso()).thenReturn(2.0);
+        when(expressMock.calcularCosto(anyFloat())).thenReturn(15.0f);
+        when(correoMock.estimarEnvio(anyFloat(), any())).thenReturn(20.0f);
     }
     
     @Test
     void envioExpressCalculaCostoCorrectamente() {
         pedido.agregarItem(item);
-        pedido.setMetodoEnvio(new EnvioExpress());
-        assertEquals(515.0, pedido.calcularCostoEnvio());
+        pedido.setMetodoEnvio(new EnvioExpress(expressMock));
+        assertEquals(15.0, pedido.calcularCostoEnvio());
     }
     
     @Test
     void envioEstandarCalculaCostoCorrectamente() {
         pedido.agregarItem(item);  // item pesa 2.0
         Direccion dir = new Direccion("Calle Falsa 123");
-        pedido.setMetodoEnvio(new EnvioEstandar(dir));
+        pedido.setMetodoEnvio(new EnvioEstandar(dir, correoMock));
         assertEquals(20.0, pedido.calcularCostoEnvio()); // 2.0 * 10 = 20.0
     }
     
     @Test
     void envioExpressEstimaUnDia() {
-        assertEquals(1, new EnvioExpress().estimarDias());
+        assertEquals(1, new EnvioExpress(expressMock).estimarDias());
     }
 
     @Test
     void envioEstandarEstimaSeteDias() {
-        assertEquals(7, new EnvioEstandar(new Direccion("Calle Falsa 123")).estimarDias());
+        assertEquals(7, new EnvioEstandar(new Direccion("Calle Falsa 123"), correoMock).estimarDias());
     }
 
     @Test
