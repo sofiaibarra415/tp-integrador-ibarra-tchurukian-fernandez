@@ -48,7 +48,7 @@ public class TransferenciaBancaria extends MetodoDePago {
 	@Override
 	protected void ejecutarTransaccion(BigDecimal monto) {
 		// aun no agrega dinero a la tienda, solo hace un print por ahora
-		String idTransaccion = "TC-" + System.currentTimeMillis();
+		String idTransaccion = "" + System.currentTimeMillis();
 		System.out.println("Transferencia de " + monto + " recibida. ID Operación: " + idTransaccion);
 		notificarResultado(idTransaccion);
 	}
