@@ -7,6 +7,7 @@ public class Pedido {
 	private List<Item> items = new ArrayList<>();
 	private EstadoPedido estado;
 	private double montoReembolsado;
+	private MetodoEnvio envio;
 	
 	Pedido(String id){
 		this.id = id;
@@ -68,9 +69,25 @@ public class Pedido {
 	public double getMontoReembolsado() {
 	    return montoReembolsado;
 	}
+	
+	public double calcularPeso() {
+	    double total = 0;
+	    for (Item item : items) {
+	        total += item.getPeso();
+	    }
+	    return total;
+	}
+	
+	public void setMetodoEnvio(MetodoEnvio envio) {
+	    this.envio = envio;
+	}
 
+	public boolean tieneMetodoEnvio() {
+	    return envio != null;
+	}
+	
 	public double calcularCostoEnvio() {
-	    return 0;
+	    return envio.calcularCosto(this);
 	}
 			
 }

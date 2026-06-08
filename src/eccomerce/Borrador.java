@@ -8,7 +8,10 @@ public class Borrador extends EstadoPedido {
 
     @Override
     public void confirmar() {
-    	pedido.setEstado(new Confirmado(pedido));
+        if (!pedido.tieneMetodoEnvio()) {
+            throw new OperacionInvalidaException("Debe asignar un método de envío antes de confirmar");
+        }
+        pedido.setEstado(new Confirmado(pedido));
     }
 
     @Override

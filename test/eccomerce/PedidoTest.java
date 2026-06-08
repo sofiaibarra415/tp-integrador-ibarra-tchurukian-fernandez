@@ -12,12 +12,14 @@ class PedidoTest {
 
 	private Pedido pedido;
     private Item item;
-
+   
     @BeforeEach
     void setUp() {
         pedido = new Pedido("PED-001");
         item = mock(Item.class);
+        MetodoEnvio envioMock = mock(MetodoEnvio.class);
         when(item.getPrecioFinal()).thenReturn(100.0);
+        pedido.setMetodoEnvio(envioMock);
     }
     
     @Test
@@ -143,5 +145,12 @@ class PedidoTest {
         pedido.iniciarPreparacion();
         pedido.enviar();
         assertEquals("ENVIADO", pedido.getEstado().getNombreEstado());
+    }
+    
+    @Test
+    void confirmarSinMetodoEnvioLanzaExcepcion() {
+        Pedido pedidoSinEnvio = new Pedido("PED-002");
+        pedidoSinEnvio.agregarItem(item);
+        assertThrows(OperacionInvalidaException.class, () -> pedidoSinEnvio.confirmar());
     }
 }
