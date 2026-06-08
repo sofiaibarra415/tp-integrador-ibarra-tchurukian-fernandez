@@ -1,4 +1,4 @@
-package eccomerce;
+package eccomerce.envio;
 
 public class Direccion {
     private String direccion;

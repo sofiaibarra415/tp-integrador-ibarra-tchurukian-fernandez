@@ -1,4 +1,6 @@
-package eccomerce;
+package eccomerce.envio;
+
+import eccomerce.pedido.Pedido;
 
 public class RetiroEnSucursal extends MetodoEnvio {
 	private Sucursal sucursal;

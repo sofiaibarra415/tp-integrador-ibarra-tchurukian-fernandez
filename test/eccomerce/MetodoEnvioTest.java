@@ -6,6 +6,14 @@ import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.Test;
 
+import eccomerce.envio.Direccion;
+import eccomerce.envio.EnvioEstandar;
+import eccomerce.envio.EnvioExpress;
+import eccomerce.envio.MetodoEnvio;
+import eccomerce.envio.RetiroEnSucursal;
+import eccomerce.envio.Sucursal;
+import eccomerce.pedido.Pedido;
+
 class MetodoEnvioTest {
 
     private Pedido pedido;

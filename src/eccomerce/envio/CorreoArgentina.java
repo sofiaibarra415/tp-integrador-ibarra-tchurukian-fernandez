@@ -1,4 +1,4 @@
-package eccomerce;
+package eccomerce.envio;
 
 public class CorreoArgentina {
 	private CorreoArgentina() {} // para el 100 de coverge en tests

@@ -1,4 +1,4 @@
-package eccomerce;
+package eccomerce.pedido;
 
 public class OperacionInvalidaException extends RuntimeException {
 	public OperacionInvalidaException(String mensaje){

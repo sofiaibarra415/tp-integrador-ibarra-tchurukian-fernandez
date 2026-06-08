@@ -1,4 +1,6 @@
-package eccomerce;
+package eccomerce.pedido;
+
+import eccomerce.Item;
 
 public abstract class EstadoPedido {
 	protected Pedido pedido;

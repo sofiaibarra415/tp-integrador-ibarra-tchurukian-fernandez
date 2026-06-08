@@ -1,4 +1,6 @@
-package eccomerce;
+package eccomerce.envio;
+
+import eccomerce.pedido.Pedido;
 
 public class EnvioExpress extends MetodoEnvio {
 

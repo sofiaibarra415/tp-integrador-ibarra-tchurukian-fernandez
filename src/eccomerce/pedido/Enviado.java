@@ -1,4 +1,6 @@
-package eccomerce;
+package eccomerce.pedido;
+
+import eccomerce.Item;
 
 public class Enviado extends EstadoPedido{
 	

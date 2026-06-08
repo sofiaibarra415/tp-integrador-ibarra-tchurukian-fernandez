@@ -1,4 +1,4 @@
-package eccomerce;
+package eccomerce.pedido;
 
 public class Cancelado extends EstadoPedido {
 	public Cancelado(Pedido p) {

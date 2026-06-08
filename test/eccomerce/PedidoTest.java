@@ -3,8 +3,18 @@ package eccomerce;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
-
 import org.junit.jupiter.api.Test;
+
+import eccomerce.pedido.Pedido;
+import eccomerce.pedido.EstadoPedido;
+import eccomerce.envio.MetodoEnvio;
+import eccomerce.pedido.Borrador;
+import eccomerce.pedido.Confirmado;
+import eccomerce.pedido.EnPreparacion;
+import eccomerce.pedido.Enviado;
+import eccomerce.pedido.Entregado;
+import eccomerce.pedido.Cancelado;
+import eccomerce.pedido.OperacionInvalidaException;
 
 
 

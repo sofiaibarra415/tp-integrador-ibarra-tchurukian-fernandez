@@ -1,6 +1,8 @@
-package eccomerce;
+package eccomerce.pedido;
 import java.util.List;
 import java.util.ArrayList;
+import eccomerce.Item;
+import eccomerce.envio.MetodoEnvio;
 
 public class Pedido {
 	private String id;
@@ -9,7 +11,7 @@ public class Pedido {
 	private double montoReembolsado;
 	private MetodoEnvio envio;
 	
-	Pedido(String id){
+	public Pedido(String id){
 		this.id = id;
 		this.estado = new Borrador(this);
 	}

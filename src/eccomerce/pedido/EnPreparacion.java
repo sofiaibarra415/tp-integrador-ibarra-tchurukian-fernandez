@@ -1,4 +1,4 @@
-package eccomerce;
+package eccomerce.pedido;
 
 public class EnPreparacion extends EstadoPedido {
     public EnPreparacion(Pedido p) {
