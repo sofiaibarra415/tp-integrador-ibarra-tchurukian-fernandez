@@ -3,13 +3,14 @@ import java.util.List;
 import java.util.ArrayList;
 import eccomerce.Item;
 import eccomerce.envio.MetodoEnvio;
+import java.time.LocalDate;
 
 public class Pedido {
 	private String id;
 	private List<Item> items = new ArrayList<>();
 	private EstadoPedido estado;
-	private double montoReembolsado;
 	private MetodoEnvio envio;
+	private NotaDeCredito notaDeCredito;
 	
 	public Pedido(String id){
 		this.id = id;
@@ -64,12 +65,12 @@ public class Pedido {
 		items.remove(i); 
 	}
 	
-	public void reembolsar(double monto) {
-	    this.montoReembolsado = monto;
+	public void generarNotaDeCredito(double monto) {
+	    this.notaDeCredito = new NotaDeCredito(this.id, monto, LocalDate.now());
 	}
 
-	public double getMontoReembolsado() {
-	    return montoReembolsado;
+	public NotaDeCredito getNotaDeCredito() {
+	    return notaDeCredito;
 	}
 	
 	public double calcularPeso() {

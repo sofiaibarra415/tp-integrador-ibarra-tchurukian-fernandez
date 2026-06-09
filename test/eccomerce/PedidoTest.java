@@ -84,7 +84,7 @@ class PedidoTest {
         pedido.cancelar();
         
         assertEquals("CANCELADO", pedido.getEstado().getNombreEstado());
-        assertEquals(100.0, pedido.getMontoReembolsado());
+        assertEquals(100.0, pedido.getNotaDeCredito().getMonto());
     }
     
     @Test
@@ -162,5 +162,33 @@ class PedidoTest {
         Pedido pedidoSinEnvio = new Pedido("PED-002");
         pedidoSinEnvio.agregarItem(item);
         assertThrows(OperacionInvalidaException.class, () -> pedidoSinEnvio.confirmar());
+    }
+    
+    @Test
+    void alCancelarDesdeEnPreparacionSeReembolsaTotal() {
+        pedido.agregarItem(item);
+        pedido.confirmar();
+        pedido.iniciarPreparacion();
+        pedido.cancelar();
+        assertEquals("CANCELADO", pedido.getEstado().getNombreEstado());
+        assertEquals(100.0, pedido.getNotaDeCredito().getMonto());
+    }
+
+    @Test
+    void notaDeCreditoGuardaElMonto() {
+        pedido.agregarItem(item);
+        pedido.confirmar();
+        pedido.cancelar();
+        assertNotNull(pedido.getNotaDeCredito());
+        assertEquals(100.0, pedido.getNotaDeCredito().getMonto());
+    }
+    
+    @Test
+    void notaDeCreditoTieneIdYFecha() {
+        pedido.agregarItem(item);
+        pedido.confirmar();
+        pedido.cancelar();
+        assertEquals("PED-001", pedido.getNotaDeCredito().getIdPedido());
+        assertNotNull(pedido.getNotaDeCredito().getFecha());
     }
 }

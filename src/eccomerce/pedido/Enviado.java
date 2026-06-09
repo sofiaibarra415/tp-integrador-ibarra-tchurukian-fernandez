@@ -13,7 +13,7 @@ public class Enviado extends EstadoPedido{
 	    for (Item i : pedido.getItems()) {
 	        i.incrementarStock();
 	    }
-	    pedido.reembolsar(pedido.calcularTotal());
+	    pedido.generarNotaDeCredito(pedido.calcularTotal());
 	    pedido.setEstado(new Cancelado(pedido));
 	}
     

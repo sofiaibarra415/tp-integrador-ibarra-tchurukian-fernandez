@@ -15,7 +15,7 @@ public class Confirmado extends EstadoPedido {
 	    for (Item i : pedido.getItems()) {
 	        i.incrementarStock();
 	    }
-	    pedido.reembolsar(pedido.calcularTotal() + pedido.calcularCostoEnvio());
+	    pedido.generarNotaDeCredito(pedido.calcularTotal() + pedido.calcularCostoEnvio());
 	    pedido.setEstado(new Cancelado(pedido));
 	}
 
