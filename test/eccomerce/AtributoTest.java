@@ -3,6 +3,8 @@ package eccomerce;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import ecommerce.Atributo;
+
 class AtributoTest {
 
     @Test

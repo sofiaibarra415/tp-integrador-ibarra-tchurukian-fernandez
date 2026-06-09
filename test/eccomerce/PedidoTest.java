@@ -5,16 +5,17 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import eccomerce.pedido.Pedido;
-import eccomerce.pedido.EstadoPedido;
-import eccomerce.envio.MetodoEnvio;
-import eccomerce.pedido.Borrador;
-import eccomerce.pedido.Confirmado;
-import eccomerce.pedido.EnPreparacion;
-import eccomerce.pedido.Enviado;
-import eccomerce.pedido.Entregado;
-import eccomerce.pedido.Cancelado;
-import eccomerce.pedido.OperacionInvalidaException;
+import ecommerce.Item;
+import ecommerce.envio.MetodoEnvio;
+import ecommerce.pedido.Borrador;
+import ecommerce.pedido.Cancelado;
+import ecommerce.pedido.Confirmado;
+import ecommerce.pedido.EnPreparacion;
+import ecommerce.pedido.Entregado;
+import ecommerce.pedido.Enviado;
+import ecommerce.pedido.EstadoPedido;
+import ecommerce.pedido.OperacionInvalidaException;
+import ecommerce.pedido.Pedido;
 
 
 

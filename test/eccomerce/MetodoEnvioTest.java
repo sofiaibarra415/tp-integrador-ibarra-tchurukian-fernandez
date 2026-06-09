@@ -5,16 +5,16 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import eccomerce.envio.Direccion;
-import eccomerce.envio.EnvioEstandar;
-import eccomerce.envio.EnvioExpress;
-import eccomerce.envio.MetodoEnvio;
-import eccomerce.envio.RetiroEnSucursal;
-import eccomerce.envio.Sucursal;
-import eccomerce.pedido.Pedido;
-
-import eccomerce.envio.CorreoArgentinaAPI;
-import eccomerce.envio.EnvioExpressAPI;
+import ecommerce.Item;
+import ecommerce.envio.CorreoArgentinaAPI;
+import ecommerce.envio.Direccion;
+import ecommerce.envio.EnvioEstandar;
+import ecommerce.envio.EnvioExpress;
+import ecommerce.envio.EnvioExpressAPI;
+import ecommerce.envio.MetodoEnvio;
+import ecommerce.envio.RetiroEnSucursal;
+import ecommerce.envio.Sucursal;
+import ecommerce.pedido.Pedido;
 
 class MetodoEnvioTest {
 

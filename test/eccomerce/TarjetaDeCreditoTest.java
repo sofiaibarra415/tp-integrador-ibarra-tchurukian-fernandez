@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import ecommerce.DatosTarjetaCredito;
+import ecommerce.MetodoDePago;
+import ecommerce.TarjetaDeCredito;
+
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
