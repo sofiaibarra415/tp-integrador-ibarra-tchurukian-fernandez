@@ -9,4 +9,9 @@ public class Cancelado extends EstadoPedido {
     public String getNombreEstado() {
         return "CANCELADO";
     }
+    
+    @Override
+    public boolean esCancelado() { 
+    	return true; 
+    }
 }

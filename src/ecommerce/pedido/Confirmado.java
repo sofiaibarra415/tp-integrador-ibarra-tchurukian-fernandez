@@ -28,4 +28,9 @@ public class Confirmado extends EstadoPedido {
     public void iniciarPreparacion() {
         pedido.setEstado(new EnPreparacion(pedido));
     }
+    
+    @Override
+    public boolean esConfirmado() { 
+    	return true; 
+    }
 }

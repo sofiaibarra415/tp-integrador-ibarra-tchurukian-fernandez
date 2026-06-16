@@ -9,4 +9,9 @@ public class Entregado extends EstadoPedido {
     public String getNombreEstado() {
         return "ENTREGADO";
     }
+    
+    @Override
+    public boolean esEntregado() { 
+    	return true; 
+    }
 }

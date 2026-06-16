@@ -26,4 +26,9 @@ public class Enviado extends EstadoPedido{
     public String getNombreEstado() {
         return "ENVIADO";
     }
+    
+    @Override
+    public boolean esEnviado() { 
+    	return true; 
+    }
 }

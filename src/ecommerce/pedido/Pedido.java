@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ecommerce.Item;
 import ecommerce.envio.MetodoEnvio;
+import ecommerce.notificaciones.ObserverPedido;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,7 @@ public class Pedido {
 	private EstadoPedido estado;
 	private MetodoEnvio envio;
 	private NotaDeCredito notaDeCredito;
+	private List<ObserverPedido> observadores = new ArrayList<>();
 	
 	public Pedido(String id){
 		this.id = id;
@@ -41,7 +43,9 @@ public class Pedido {
 		estado.quitarItem(i); 
 	}
 	public void setEstado(EstadoPedido e) { 
-		this.estado = e; 
+		EstadoPedido anterior = this.estado;
+	    this.estado = e;
+	    notificar(anterior, e);
 	}
 	
 	public EstadoPedido getEstado() {
@@ -93,6 +97,20 @@ public class Pedido {
 	
 	public double calcularCostoEnvio() {
 	    return envio.calcularCosto(this);
+	}
+	
+	public void suscribir(ObserverPedido o) {
+	    this.observadores.add(o);
+	}
+
+	public void desuscribir(ObserverPedido o) {
+		this.observadores.remove(o);
+	}
+
+	private void notificar(EstadoPedido anterior, EstadoPedido nuevo) {
+	   for (ObserverPedido o : this.observadores) {
+		   o.actualizar(anterior, nuevo);
+	   }
 	}
 			
 }

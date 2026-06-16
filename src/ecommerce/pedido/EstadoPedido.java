@@ -51,5 +51,10 @@ public abstract class EstadoPedido {
 		);
 	}
 	
+	public boolean esConfirmado()  { return false; }
+	public boolean esEnviado()     { return false; }
+	public boolean esEntregado()   { return false; }
+	public boolean esCancelado()   { return false; }
+	
 	public abstract String getNombreEstado();
 }
