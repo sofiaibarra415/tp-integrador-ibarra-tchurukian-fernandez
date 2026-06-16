@@ -1,4 +1,4 @@
-package ecommerce;
+package eccomerce.items;
 
 import java.util.ArrayList;
 
@@ -63,16 +63,7 @@ public Paquete(String nombre, String descripcion, String categoria, double descu
 		//recorro todo los productos y si es paquete es recursivo
 	}
 
-	@Override
-	public void agregarAtributo(String unNombre, String unValor) {
-		
-		if (unNombre.equalsIgnoreCase("peso")) {
-			throw new IllegalArgumentException("En un Paquete el peso es la suma de sus Productos, no es un atributo seteable"); //error lanza excepcion
-		}else {
-			super.agregarAtributo(unNombre, unValor);
-		}
-	}
-
+	
 	@Override
 	public double getPeso() {
 		

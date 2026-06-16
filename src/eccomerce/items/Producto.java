@@ -1,4 +1,4 @@
-package ecommerce;
+package eccomerce.items;
 
 
 public class Producto extends Item {
@@ -9,12 +9,13 @@ public class Producto extends Item {
 	private String 	sku;
 	
 	public Producto(String nombre, String descripcion, String categoria, double descuentoPromocional, String sku,
-			String marca, double precioBase, int stock) {
+			String marca, double precioBase, int stock,double peso) {
 		super(nombre, descripcion, categoria, descuentoPromocional);
 		this.sku = sku;
 		this.marca = marca;
 		this.precioBase = precioBase;
 		this.stock = stock;
+		this.setPeso(peso);
 	}	
 	
 	@Override

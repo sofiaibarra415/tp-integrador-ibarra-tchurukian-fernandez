@@ -1,4 +1,4 @@
-package ecommerce;
+package eccomerce.items;
 
 public class Atributo {
 private String nombre;

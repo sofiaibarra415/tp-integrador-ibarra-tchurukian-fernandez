@@ -5,8 +5,8 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import eccomerce.items.Item;
 import ecommerce.notificaciones.Fidelizacion;
-import ecommerce.Item;
 import ecommerce.notificaciones.GeneradorFactura;
 import ecommerce.notificaciones.MailSender;
 import ecommerce.notificaciones.NotificadorEmail;

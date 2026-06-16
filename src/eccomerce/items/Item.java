@@ -1,4 +1,4 @@
-package ecommerce;
+package eccomerce.items;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ abstract public class Item {
 	private String	categoria;
 	private double 	descuentoPromocional;
 	private ArrayList<Atributo> atributos = new ArrayList<>();
-	private double peso = 0;	
+	private double peso;	
 
 public Item(String nombre, String descripcion, String categoria, double descuentoPromocional) {
 		this.nombre = nombre;
@@ -58,33 +58,21 @@ public void agregarAtributo(String unNombre, String unValor) {
 	if (this.existeAtributoOpcional(unNombre)) {
 		throw new IllegalArgumentException("El atributo ya existe"); //error lanza excepcion
 	}
-	if (unNombre.equalsIgnoreCase("peso")) {
-		this.setPeso(Double.parseDouble(unValor)); //convierto string en double
-	}
 	this.atributos.add(new Atributo(unNombre, unValor)) ;
 	// si no existe se crea un atributo y se agrega a la lista de atributos dinamicos
 	
 }
 
 public boolean existeAtributoOpcional(String nombreAtributo) {
-	if (nombreAtributo.equalsIgnoreCase("peso") && this.hayPeso()){
-		return true;
-		
-	}else {
+	
 	return this.getAtributos().stream()
 		    			      .anyMatch(atributo -> atributo.getNombre().equalsIgnoreCase(nombreAtributo) );
-	}
+	
 }
 
 public String getAtributoOpcional(String nombreAtributo) {
 	if ( ! this.existeAtributoOpcional(nombreAtributo)) {
 		throw new IllegalArgumentException("El atributo no existe"); //error lanza excepcion
-	}
-	
-	if (nombreAtributo.equalsIgnoreCase("peso")){
-		
-		return String.valueOf(this.getPeso());
-		
 	}else {
 	return this.getAtributos().stream()
 			             .filter(atributo -> atributo.getNombre().equalsIgnoreCase(nombreAtributo) ) // filtro para encontrar el atributo

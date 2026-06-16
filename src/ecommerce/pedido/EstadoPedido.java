@@ -1,6 +1,6 @@
 package ecommerce.pedido;
 
-import ecommerce.Item;
+import eccomerce.items.Item;
 
 public abstract class EstadoPedido {
 	protected Pedido pedido;

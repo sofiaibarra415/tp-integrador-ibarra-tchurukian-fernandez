@@ -6,8 +6,8 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ecommerce.Item;
-import ecommerce.Paquete;
+import eccomerce.items.Item;
+import eccomerce.items.Paquete;
 
 import java.util.ArrayList;
 

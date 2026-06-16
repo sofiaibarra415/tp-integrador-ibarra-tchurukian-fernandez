@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ecommerce.Producto;
+import eccomerce.items.Producto;
 
 class ProductoTest {
 
@@ -22,7 +22,8 @@ class ProductoTest {
             "ABC-123", 				//sku
             "Sony", 				//marca
             120.0, 					//precio base
-            1						//stock
+            1,						//stock
+            20						//peso
         );
     }
 
@@ -71,17 +72,8 @@ class ProductoTest {
  
     @Test
     void test007_FuncionamientoDe_hayPeso_Y_getPeso() {
-        // arranca en peso cero y devuelve false
-        assertFalse(producto.existeAtributoOpcional("Peso"));
-        assertFalse(producto.hayPeso(),"fallo 7.2");
-
-        //si lo agrego
-        producto.agregarAtributo("Peso","0.35");
-        
-        assertTrue(producto.existeAtributoOpcional("Peso"));
-        assertEquals("0.35", producto.getAtributoOpcional("Peso"));
-        
-        assertEquals(0.35, producto.getPeso(), 0.001);
+                
+        assertEquals(20, producto.getPeso(), 0.001);
         assertTrue(producto.hayPeso());
     }
 
@@ -93,13 +85,13 @@ class ProductoTest {
 
     @Test
     void test009_EsItem_Invalido_SiPrecioBaseEsCero() {
-        Producto prodInvalido = new Producto("a", "b", "c", 5.0, "d", "e", 0, 5);
+        Producto prodInvalido = new Producto("a", "b", "c", 5.0, "d", "e", 0, 5,20);
         assertFalse(prodInvalido.esItemValido());
     }
 
     @Test
     void test010_EsItem_Invalido_SiStockEsNegativo() {
-        Producto prodInvalido = new Producto("a", "b", "c", 30, "d", "e", 5.0, -5);
+        Producto prodInvalido = new Producto("a", "b", "c", 30, "d", "e", 5.0, -5,20);
         assertFalse(prodInvalido.esItemValido());
     }
 
