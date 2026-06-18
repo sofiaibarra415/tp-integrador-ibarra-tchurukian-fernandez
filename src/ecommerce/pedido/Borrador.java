@@ -1,6 +1,6 @@
 package ecommerce.pedido;
 
-import eccomerce.items.Item;
+import ecommerce.items.Item;
 
 public class Borrador extends EstadoPedido {
 

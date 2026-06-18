@@ -1,10 +1,12 @@
-package eccomerce.catalogo;
+package ecommerce.catalogo;
 
-import eccomerce.items.Item;
+import ecommerce.items.Item;
 
 public class CriterioDeBusquedaSimpleDisponibilidad extends CriterioDeBusqueda {
 
-    @Override
+
+
+	@Override
     public boolean evaluar(Item item) {
         return item.hayStock();
     }

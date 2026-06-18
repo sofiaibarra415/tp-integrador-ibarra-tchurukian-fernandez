@@ -1,6 +1,6 @@
-package eccomerce.catalogo;
+package ecommerce.catalogo;
 
-import eccomerce.items.Item;
+import ecommerce.items.Item;
 
 
 public abstract class CriterioDeBusqueda {

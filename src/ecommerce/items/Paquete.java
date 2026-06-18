@@ -1,4 +1,4 @@
-package eccomerce.items;
+package ecommerce.items;
 
 import java.util.ArrayList;
 
@@ -50,9 +50,10 @@ public Paquete(String nombre, String descripcion, String categoria, double descu
 	@Override
 	public int getStock() {
 		return this.items.stream()
-					     .mapToInt(item -> item.getStock())
+					     .mapToInt(item -> item.getStock())//si corresponde es recursivo
 					     .min() //me da un optional int
 					     .orElse(0); // por si el paquete esta vacio
+		//el stock de un paquete esta dado por el producto con menos stock que contenga
 		
 	}
 
@@ -66,6 +67,9 @@ public Paquete(String nombre, String descripcion, String categoria, double descu
 	
 	@Override
 	public double getPeso() {
+		if (this.hayPeso()) {
+			throw new IllegalArgumentException("No hay peso"); //error lanza excepcion
+		}
 		
 		return this.items.stream()
 				         .mapToDouble(item -> item.getPeso())
@@ -77,7 +81,8 @@ public Paquete(String nombre, String descripcion, String categoria, double descu
 		
 		return this.items.stream()
 				 .allMatch(item -> item.hayPeso());
-       //recorro todo los productos y si es paquete es recursivo;
+       //recorro todo los productos y si es paquete es recursivo
+		// solo si todos los procuctos tienen peso entonces el paquete tiene precio
 	}
 
 

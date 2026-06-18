@@ -1,4 +1,4 @@
-package eccomerce.items;
+package ecommerce.items;
 
 
 public class Producto extends Item {
@@ -7,6 +7,7 @@ public class Producto extends Item {
 	private double 	precioBase;
 	private int 	stock;
 	private String 	sku;
+	private double peso;
 	
 	public Producto(String nombre, String descripcion, String categoria, double descuentoPromocional, String sku,
 			String marca, double precioBase, int stock,double peso) {
@@ -15,7 +16,7 @@ public class Producto extends Item {
 		this.marca = marca;
 		this.precioBase = precioBase;
 		this.stock = stock;
-		this.setPeso(peso);
+		this.peso = peso;
 	}	
 	
 	@Override
@@ -51,7 +52,8 @@ public class Producto extends Item {
 				&& this.getStock() 		>= 0	//el stock no puede ser negativo, pero si cero
 				&& this.getDescuentoPromocional() >= 0  //el decuento tiene que ser cero o mas
 				&& this.getDescuentoPromocional() < 100 //el descuento tiene que ser menor a cien
-				&& this.getAtributos().stream().noneMatch(atributo -> atributo.getValor() == null);  //cheque que ningun atributo dinamico tiene valor nulo     
+				&& this.getAtributos().stream().noneMatch(atributo -> atributo.getValor() == null)//cheque que ningun atributo dinamico tiene valor nulo 
+				&& this.hayPeso();      
 				
 	}
 
@@ -75,16 +77,18 @@ public class Producto extends Item {
 	}
 
 		
-	
 	@Override
 	public double getPeso() {
-		return super.getPeso();
+		if (!this.hayPeso()) {
+			throw new IllegalArgumentException("No hay peso"); //error lanza excepcion
+		}
+		return peso;
 	}
 
 	@Override
 	public boolean hayPeso() {
 		
-		return this.getPeso() > 0;
+		return peso > 0;
 	}
 
 }

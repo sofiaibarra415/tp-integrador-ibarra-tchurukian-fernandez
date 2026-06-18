@@ -1,4 +1,4 @@
-package eccomerce.items;
+package ecommerce.items;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ abstract public class Item {
 	private String	categoria;
 	private double 	descuentoPromocional;
 	private ArrayList<Atributo> atributos = new ArrayList<>();
-	private double peso;	
+		
 
 public Item(String nombre, String descripcion, String categoria, double descuentoPromocional) {
 		this.nombre = nombre;
@@ -21,10 +21,11 @@ public Item(String nombre, String descripcion, String categoria, double descuent
 abstract public void 	incrementarStock();
 abstract public void 	decrementarStock();
 abstract public double 	getPrecioBase();
-abstract public boolean 	esItemValido();
+abstract public boolean esItemValido();
 abstract public int		getStock();
 abstract public boolean	hayStock();
-abstract public boolean  hayPeso();
+abstract public boolean hayPeso();
+abstract public double 	getPeso();
 
 public String getNombre() {
 	return this.nombre;
@@ -44,14 +45,6 @@ public double getPrecioFinal() {
 
 public ArrayList<Atributo> getAtributos() {
 	return atributos;
-}
-
-public double getPeso() {
-	return peso;
-}
-
-public void setPeso(double peso) {
-	this.peso = peso;
 }
 
 public void agregarAtributo(String unNombre, String unValor) {
@@ -77,7 +70,7 @@ public String getAtributoOpcional(String nombreAtributo) {
 	return this.getAtributos().stream()
 			             .filter(atributo -> atributo.getNombre().equalsIgnoreCase(nombreAtributo) ) // filtro para encontrar el atributo
 			             .findFirst()		// deberia haber uno solo, pero por las dudas elijo el primero
-			             .get()				// me da el objeto, si noy falla, se deberia chequear que este el atributo con boolean existeAtributoOpcional(String nombreAtributo) antes de usar 
+			             .get()				// me da el objeto, no falla ya cheque que exista antes
 			             .getValor();		// me da el valor del atributo
 	}
 }

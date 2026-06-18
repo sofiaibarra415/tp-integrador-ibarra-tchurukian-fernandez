@@ -1,8 +1,8 @@
-package eccomerce.catalogo;
+package ecommerce.catalogo;
 
 import java.util.ArrayList;
 
-import eccomerce.items.Item;
+import ecommerce.items.Item;
 
 public class CriterioDeBusquedaCompuestoAND extends CriterioDeBusqueda {
     

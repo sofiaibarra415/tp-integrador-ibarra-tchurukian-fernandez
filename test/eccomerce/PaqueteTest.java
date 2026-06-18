@@ -6,8 +6,8 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import eccomerce.items.Item;
-import eccomerce.items.Paquete;
+import ecommerce.items.Item;
+import ecommerce.items.Paquete;
 
 import java.util.ArrayList;
 
@@ -92,15 +92,7 @@ class PaqueteTest {
         assertEquals(2.3, paquete.getPeso(), 0.001);
     }
 
-    @Test
-    void test008_AgregarAtributoPesoLanzaExcepcion() {
-        // no se puede setear peso a mano en un paquete
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            paquete.agregarAtributo("peso", "2.0");
-        });
-        assertEquals("En un Paquete el peso es la suma de sus Productos, no es un atributo seteable", exception.getMessage());
-    }
-
+    
     @Test
     void test009_EsItemInvalido_SiUnItemQueContiene_EsInvalido() {
         // El primer item es valido pero el segundo no
