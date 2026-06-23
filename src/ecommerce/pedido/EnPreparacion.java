@@ -1,5 +1,5 @@
 package ecommerce.pedido;
-import ecommerce.items.Item;
+import ecommerce.catalogo1.Item;
 
 public class EnPreparacion extends EstadoPedido {
     public EnPreparacion(Pedido p) {

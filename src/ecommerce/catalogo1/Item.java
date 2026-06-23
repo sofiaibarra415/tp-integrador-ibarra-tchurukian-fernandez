@@ -1,4 +1,4 @@
-package ecommerce.items;
+package ecommerce.catalogo1;
 
 import java.util.ArrayList;
 

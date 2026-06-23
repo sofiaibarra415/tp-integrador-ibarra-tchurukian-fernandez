@@ -5,8 +5,8 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ecommerce.catalogo1.Item;
 import ecommerce.envio.MetodoEnvio;
-import ecommerce.items.Item;
 import ecommerce.pedido.Borrador;
 import ecommerce.pedido.Cancelado;
 import ecommerce.pedido.Confirmado;

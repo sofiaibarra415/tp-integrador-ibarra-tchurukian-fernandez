@@ -1,9 +1,9 @@
-package eccomerce;
+package eccomerce.catalogo1;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import ecommerce.items.Atributo;
+import ecommerce.catalogo1.Atributo;
 
 class AtributoTest {
 

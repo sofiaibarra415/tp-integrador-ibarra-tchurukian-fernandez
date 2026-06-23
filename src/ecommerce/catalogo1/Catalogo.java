@@ -1,8 +1,8 @@
-package ecommerce.catalogo;
+package ecommerce.catalogo1;
 
 import java.util.ArrayList;
 
-import ecommerce.items.Item;
+import ecommerce.busqueda6.CriterioDeBusqueda;
 
 public class Catalogo {
 	
@@ -22,7 +22,11 @@ public class Catalogo {
     }
 
     
-    public ArrayList<Item> buscar(CriterioDeBusqueda unCriterio) {
+    public ArrayList<Item> getItemsDelCatalogo() {
+		return itemsDelCatalogo;
+	}
+
+	public ArrayList<Item> buscar(CriterioDeBusqueda unCriterio) {
         
     	ArrayList<Item> resultados = new ArrayList<>();
         

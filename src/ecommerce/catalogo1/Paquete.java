@@ -1,4 +1,4 @@
-package ecommerce.items;
+package ecommerce.catalogo1;
 
 import java.util.ArrayList;
 
@@ -26,11 +26,10 @@ public Paquete(String nombre, String descripcion, String categoria, double descu
 	@Override
 	public double getPrecioBase() {
 		return this.items.stream()
-						 .mapToDouble(item -> item.getPrecioBase())
+						 .mapToDouble(item -> item.getPrecioFinal())
 						 .sum();
 		//si son productos suma y si son paquetes entra recursivamente a cada paquete anidado
-		//por lo que entendi los descuentos no se anidan
-		//preguntar
+		
 		
 	}
 
@@ -43,7 +42,8 @@ public Paquete(String nombre, String descripcion, String categoria, double descu
 				&& this.getDescuentoPromocional() >= 0  //el decuento tiene que ser cero o mas
 				&& this.getDescuentoPromocional() < 100 //el descuento tiene que ser menor a cien
 				&& this.getAtributos().stream().noneMatch(atributo -> atributo.getValor() == null)
-				&& this.items.stream().allMatch(item -> item.esItemValido()); //recursion
+				&& this.items.stream().allMatch(item -> item.esItemValido()) //recursion
+				&& !this.items.isEmpty(); //si esta vacio el paquete no es valido
 	}
 
 
@@ -67,7 +67,7 @@ public Paquete(String nombre, String descripcion, String categoria, double descu
 	
 	@Override
 	public double getPeso() {
-		if (this.hayPeso()) {
+		if (!this.hayPeso()) {
 			throw new IllegalArgumentException("No hay peso"); //error lanza excepcion
 		}
 		

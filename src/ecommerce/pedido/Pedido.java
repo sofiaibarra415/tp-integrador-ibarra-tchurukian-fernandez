@@ -2,8 +2,8 @@ package ecommerce.pedido;
 import java.util.List;
 import java.util.ArrayList;
 
+import ecommerce.catalogo1.Item;
 import ecommerce.envio.MetodoEnvio;
-import ecommerce.items.Item;
 import ecommerce.notificaciones.ObserverPedido;
 
 import java.time.LocalDate;

@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ecommerce.catalogo1.Item;
 import ecommerce.envio.CorreoArgentinaAPI;
 import ecommerce.envio.Direccion;
 import ecommerce.envio.EnvioEstandar;
@@ -13,7 +14,6 @@ import ecommerce.envio.EnvioExpressAPI;
 import ecommerce.envio.MetodoEnvio;
 import ecommerce.envio.RetiroEnSucursal;
 import ecommerce.envio.Sucursal;
-import ecommerce.items.Item;
 import ecommerce.pedido.Pedido;
 
 class MetodoEnvioTest {

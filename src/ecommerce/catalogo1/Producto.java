@@ -1,4 +1,4 @@
-package ecommerce.items;
+package ecommerce.catalogo1;
 
 
 public class Producto extends Item {

@@ -1,6 +1,6 @@
 package ecommerce.pedido;
 
-import ecommerce.items.Item;
+import ecommerce.catalogo1.Item;
 
 public class Enviado extends EstadoPedido{
 	
