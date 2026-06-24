@@ -1,4 +1,4 @@
-package eccomerce.catalogo1;
+package ecommerce;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
