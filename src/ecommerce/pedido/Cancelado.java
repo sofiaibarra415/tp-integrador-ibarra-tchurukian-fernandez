@@ -11,7 +11,7 @@ public class Cancelado extends EstadoPedido {
     }
     
     @Override
-    public boolean esCancelado() { 
+    public boolean aplicaCuponFidelidad() { 
     	return true; 
     }
 }

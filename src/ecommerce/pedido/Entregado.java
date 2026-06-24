@@ -11,7 +11,12 @@ public class Entregado extends EstadoPedido {
     }
     
     @Override
-    public boolean esEntregado() { 
+    public boolean esAlertable() { 
+    	return true; 
+    }
+    
+    @Override
+    public boolean esFacturable() { 
     	return true; 
     }
 }

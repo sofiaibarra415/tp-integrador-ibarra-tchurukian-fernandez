@@ -30,7 +30,7 @@ public class Confirmado extends EstadoPedido {
     }
     
     @Override
-    public boolean esConfirmado() { 
+    public boolean esAlertable() { 
     	return true; 
     }
 }

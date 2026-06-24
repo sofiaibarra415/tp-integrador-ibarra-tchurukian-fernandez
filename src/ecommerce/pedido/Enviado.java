@@ -28,7 +28,7 @@ public class Enviado extends EstadoPedido{
     }
     
     @Override
-    public boolean esEnviado() { 
+    public boolean esAlertable() { 
     	return true; 
     }
 }

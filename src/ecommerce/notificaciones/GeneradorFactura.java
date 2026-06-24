@@ -4,7 +4,7 @@ import ecommerce.pedido.EstadoPedido;
 public class GeneradorFactura implements ObserverPedido {
 	@Override
 	public void actualizar(EstadoPedido anterior, EstadoPedido nuevo) {
-	    if (nuevo.esEntregado()) {
+	    if (nuevo.esFacturable()) {
 	        System.out.println("Generando factura para pedido entregado.");
 	    }
 	}

@@ -51,10 +51,9 @@ public abstract class EstadoPedido {
 		);
 	}
 	
-	public boolean esConfirmado()  { return false; }
-	public boolean esEnviado()     { return false; }
-	public boolean esEntregado()   { return false; }
-	public boolean esCancelado()   { return false; }
+	public boolean esAlertable()          { return false; }
+	public boolean esFacturable()         { return false; }
+	public boolean aplicaCuponFidelidad() { return false; }
 	
 	public abstract String getNombreEstado();
 }
