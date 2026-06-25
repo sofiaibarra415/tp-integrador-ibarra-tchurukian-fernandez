@@ -3,9 +3,11 @@ package ecommerce.pago;
 public class BilleteraVirtual extends MetodoDePago {
 	
 	private APIBilletera api;
+    private RegistroPagos reg;
 	
-	public BilleteraVirtual(APIBilletera api) {
+	public BilleteraVirtual(APIBilletera api, RegistroPagos reg) {
 		this.api = api;
+		this.reg = reg;
 	}
 	@Override
 	protected boolean validarDatos(DatosPago datos) {
@@ -32,9 +34,8 @@ public class BilleteraVirtual extends MetodoDePago {
 	}
 
 	@Override
-	protected ResultadoPago notificarResultado(String idTransaccion, DatosPago datos, double monto) {
+	protected void notificarResultado(String idTransaccion, DatosPago datos, double monto) {
 		api.push("Transacción " + idTransaccion + " exitosa");
-		ResultadoPago res = new ResultadoPago();
-		return res;
+		reg.agregarId(idTransaccion);
 	}
 }

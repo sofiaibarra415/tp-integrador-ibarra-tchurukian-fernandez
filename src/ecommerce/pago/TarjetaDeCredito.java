@@ -3,12 +3,14 @@ package ecommerce.pago;
 public class TarjetaDeCredito extends MetodoDePago {
 	
     private APITarjeta api;
+    private RegistroPagos reg;
 	
-	public TarjetaDeCredito(APITarjeta api) {
+	public TarjetaDeCredito(APITarjeta api, RegistroPagos reg) {
 		//this.nroTarjeta = nroTarjeta;
 		//this.cvv =cvv;
 		//this.vencimiento = vencimiento;
 		 this.api = api;
+		 this.reg = reg;
 	}
 	@Override
 	protected boolean validarDatos(DatosPago datos) {
@@ -31,8 +33,9 @@ public class TarjetaDeCredito extends MetodoDePago {
 	}
 	
 	@Override
-	protected ResultadoPago notificarResultado(String idTransaccion, DatosPago datos, double monto) {
+	protected void notificarResultado(String idTransaccion, DatosPago datos, double monto) {
 		DatosTarjetaCredito dt = (DatosTarjetaCredito) datos;
-		return new CuponPago(idTransaccion, dt.getNumeroTarjeta(), dt.getCvv(), monto);
+		reg.agregarComprobante(new CuponPago(idTransaccion, dt.getNumeroTarjeta(), dt.getCvv(), monto));
+		reg.agregarId(idTransaccion);
 	}
 }
