@@ -2,7 +2,7 @@ package ecommerce.pago;
 
 public interface APIBilletera {
 	//true si hay saldo suficiente
-	boolean saldoSuficienteEnLaCuenta(String alias, double saldo);
+	boolean saldoSuficienteEnLaCuenta(String alias, double saldo, double monto);
 	//devuelve idReservaSaldo
 	String bloquearSaldoDeLaCuenta(String alias, double saldo);
 	//devuelve id de transacción

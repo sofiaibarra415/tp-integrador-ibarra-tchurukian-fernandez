@@ -36,7 +36,7 @@ class MetodoDePagoTest {
 		DatosBilleteraVirtual datos = new DatosBilleteraVirtual(
 				100.0, "usuario");
 		
-		when(apiBilletera.saldoSuficienteEnLaCuenta("usuario", 100.0))
+		when(apiBilletera.saldoSuficienteEnLaCuenta("usuario", 100.0, 100.0))
 			.thenReturn(true);
 		when(apiBilletera.bloquearSaldoDeLaCuenta("usuario", 100.0))
 			.thenReturn("ID0101010101");
