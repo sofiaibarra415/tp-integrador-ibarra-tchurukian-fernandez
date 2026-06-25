@@ -5,7 +5,7 @@ public interface APITarjeta {
 	
 	boolean sonDatosValidos(String nroTarjeta, String cvv, YearMonth vencimiento);
 	
-    String preAutorizar(String nroTarjeta, String cvv, Double monto);
+    String preAutorizar(String nroTarjeta, String cvv, double monto);
     
     String ejecutarTransaccion(String idPreAutorizacion); // se le envía la ID de pre autorización
 }
