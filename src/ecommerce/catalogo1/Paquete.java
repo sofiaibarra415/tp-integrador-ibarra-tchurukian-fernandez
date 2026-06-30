@@ -2,6 +2,8 @@ package ecommerce.catalogo1;
 
 import java.util.ArrayList;
 
+import ecommerce.reportes8.ItemVisitor;
+
 public class Paquete extends Item {
 	
 	private ArrayList<Item> items = new ArrayList<>();
@@ -84,7 +86,34 @@ public Paquete(String nombre, String descripcion, String categoria, double descu
        //recorro todo los productos y si es paquete es recursivo
 		// solo si todos los procuctos tienen peso entonces el paquete tiene precio
 	}
-
-
+	
+	@Override
+	public void registrarVentaConFactor(double factorAcumulado) {
+	
+	
+	double factorEstePaquete = (1 - this.getDescuentoPromocional() / 100);
+	//calculo el factor de descuento de este paquete
+	//o sea si el descuento es 10 el factor queda en 0.9
+	
+	
+	double nuevoFactorAcumulado = factorAcumulado * factorEstePaquete;
+	//multiplico el factor de arriba por el propio para anidar los descuentos
+	
+	
+	this.items.forEach(item -> item.registrarVentaConFactor(nuevoFactorAcumulado));
+	//le mando el nuevo factor a los item de este paquete
+	//si es un paquete el item estonces es recursivo
+	
+	double precioProporcionalPaquete = this.getPrecioFinal() * factorAcumulado;
+	Venta ventaPaquete = new Venta(precioProporcionalPaquete);
+	this.agregarRegistroVenta(ventaPaquete);
+	//registro la venta de este paquete con su precio proporcianal
+	}
+	
+	@Override
+	public void accept(ItemVisitor visitor) {
+	    visitor.visit(this); // voy a visit(Producto)
+	    					 //mitad de camino del double dispatch
+	}
 	
 }

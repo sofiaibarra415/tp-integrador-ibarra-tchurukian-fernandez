@@ -7,6 +7,7 @@ public class Confirmado extends EstadoPedido {
         super(p);
         for (Item i : p.getItems()) {
         	i.decrementarStock();
+        	i.registrarVenta();
         }
     }
     

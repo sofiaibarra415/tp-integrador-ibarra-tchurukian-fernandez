@@ -1,5 +1,6 @@
 package ecommerce.catalogo1;
 
+import ecommerce.reportes8.ItemVisitor;
 
 public class Producto extends Item {
 
@@ -90,5 +91,22 @@ public class Producto extends Item {
 		
 		return peso > 0;
 	}
+	
+	@Override
+	public void registrarVentaConFactor(double factorAcumulado) {
+		
+	double precioProporcionalFinal = this.getPrecioFinal() * factorAcumulado;
+	//calculo el precio proporcional con los descuentos acumulados de las capas superiores
+	//si entro aca de una porque la venta era un producto y no un paquete
+	//el factorAcumulado es uno y no cambia precio
+		
+	Venta nuevaVenta = new Venta(precioProporcionalFinal);
+	this.agregarRegistroVenta(nuevaVenta);
+	}
 
+	@Override
+	public void accept(ItemVisitor visitor) {
+	    visitor.visit(this); // voy a visit(Producto)
+	    					 //mitad de camino del double dispatch
+	}
 }
