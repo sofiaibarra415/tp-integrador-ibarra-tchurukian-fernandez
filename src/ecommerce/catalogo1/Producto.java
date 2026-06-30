@@ -1,6 +1,6 @@
 package ecommerce.catalogo1;
 
-import ecommerce.reportes8.ItemVisitor;
+import ecommerce.reportes.ItemVisitor;
 
 public class Producto extends Item {
 

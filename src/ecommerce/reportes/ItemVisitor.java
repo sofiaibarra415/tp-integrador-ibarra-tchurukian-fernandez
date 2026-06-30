@@ -1,4 +1,4 @@
-package ecommerce.reportes8;
+package ecommerce.reportes;
 
 import ecommerce.catalogo1.Item;
 import ecommerce.catalogo1.Paquete;

@@ -2,7 +2,7 @@ package ecommerce.catalogo1;
 
 import java.util.ArrayList;
 
-import ecommerce.reportes8.ItemVisitor;
+import ecommerce.reportes.ItemVisitor;
 
 public class Paquete extends Item {
 	
