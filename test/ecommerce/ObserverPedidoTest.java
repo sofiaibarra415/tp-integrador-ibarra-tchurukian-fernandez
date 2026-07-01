@@ -96,37 +96,29 @@ class ObserverPedidoTest {
 
     @Test
     void generadorFacturaActuaAlEntregar() {
-        Pedido pedidoMock = mock(Pedido.class);
-        when(pedidoMock.getItems()).thenReturn(new java.util.ArrayList<>());
         GeneradorFactura g = new GeneradorFactura();
-        Entregado entregado = new Entregado(pedidoMock);
+        Entregado entregado = new Entregado();
         g.actualizar(mock(EstadoPedido.class), entregado);
     }
 
     @Test
     void generadorFacturaNoActuaEnOtroEstado() {
-        Pedido pedidoMock = mock(Pedido.class);
-        when(pedidoMock.getItems()).thenReturn(new java.util.ArrayList<>());
         GeneradorFactura g = new GeneradorFactura();
-        Cancelado cancelado = new Cancelado(pedidoMock);
+        Cancelado cancelado = new Cancelado();
         g.actualizar(mock(EstadoPedido.class), cancelado);
     }
 
     @Test
     void fidelizacionActuaAlCancelar() {
-        Pedido pedidoMock = mock(Pedido.class);
-        when(pedidoMock.getItems()).thenReturn(new java.util.ArrayList<>());
         Fidelizacion f = new Fidelizacion();
-        Cancelado cancelado = new Cancelado(pedidoMock);
+        Cancelado cancelado = new Cancelado();
         f.actualizar(mock(EstadoPedido.class), cancelado);
     }
 
     @Test
     void fidelizacionNoActuaEnOtroEstado() {
-        Pedido pedidoMock = mock(Pedido.class);
-        when(pedidoMock.getItems()).thenReturn(new java.util.ArrayList<>());
         Fidelizacion f = new Fidelizacion();
-        Entregado entregado = new Entregado(pedidoMock);
+        Entregado entregado = new Entregado();
         f.actualizar(mock(EstadoPedido.class), entregado);
     }
 }

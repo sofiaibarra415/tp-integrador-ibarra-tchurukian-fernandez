@@ -18,29 +18,29 @@ public class Pedido {
 	
 	public Pedido(String id){
 		this.id = id;
-		this.estado = new Borrador(this);
+		this.estado = new Borrador();
 	}
-	
+
 	public void confirmar() {
-		estado.confirmar();
+		estado.confirmar(this);
 	}
 	public void cancelar() {
-		estado.cancelar();
+		estado.cancelar(this);
 	}
-	public void iniciarPreparacion() { 
-		estado.iniciarPreparacion();
+	public void iniciarPreparacion() {
+		estado.iniciarPreparacion(this);
 	}
-	public void enviar() { 
-		estado.enviar(); 
+	public void enviar() {
+		estado.enviar(this);
 	}
-	public void entregar() { 
-		estado.entregar(); 
+	public void entregar() {
+		estado.entregar(this);
 	}
-	public void agregarItem(Item i) { 
-		estado.agregarItem(i);
+	public void agregarItem(Item i) {
+		estado.agregarItem(this, i);
 	}
-	public void quitarItem(Item i) { 
-		estado.quitarItem(i); 
+	public void quitarItem(Item i) {
+		estado.quitarItem(this, i);
 	}
 	public void setEstado(EstadoPedido e) { 
 		EstadoPedido anterior = this.estado;

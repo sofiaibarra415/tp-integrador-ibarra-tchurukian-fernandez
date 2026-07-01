@@ -4,12 +4,8 @@ import ecommerce.catalogo1.Item;
 
 public class Borrador extends EstadoPedido {
 
-    public Borrador(Pedido p) {
-        super(p);
-    }
-
     @Override
-    public void confirmar() {
+    public void confirmar(Pedido pedido) {
         if (!pedido.tieneMetodoEnvio()) {
             throw new OperacionInvalidaException("Debe asignar un método de envío antes de confirmar");
         }
@@ -17,17 +13,17 @@ public class Borrador extends EstadoPedido {
     }
 
     @Override
-    public void cancelar() {
-    	pedido.setEstado(new Cancelado(pedido));
+    public void cancelar(Pedido pedido) {
+    	pedido.setEstado(new Cancelado());
     }
 
     @Override
-    public void agregarItem(Item i) {
+    public void agregarItem(Pedido pedido, Item i) {
         pedido.addItem(i);
     }
 
     @Override
-    public void quitarItem(Item i) {
+    public void quitarItem(Pedido pedido, Item i) {
         pedido.removeItem(i);
     }
 

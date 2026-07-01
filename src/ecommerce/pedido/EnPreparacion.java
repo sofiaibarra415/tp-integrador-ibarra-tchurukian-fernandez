@@ -2,22 +2,19 @@ package ecommerce.pedido;
 import ecommerce.catalogo1.Item;
 
 public class EnPreparacion extends EstadoPedido {
-    public EnPreparacion(Pedido p) {
-        super(p);
-    }
 
     @Override
-    public void cancelar() {
+    public void cancelar(Pedido pedido) {
         for (Item i : pedido.getItems()) {
             i.incrementarStock();
         }
         pedido.generarNotaDeCredito(pedido.calcularTotal() + pedido.calcularCostoEnvio());
-        pedido.setEstado(new Cancelado(pedido));
+        pedido.setEstado(new Cancelado());
     }
-    
+
     @Override
-    public void enviar() {
-    	pedido.setEstado(new Enviado(pedido));
+    public void enviar(Pedido pedido) {
+    	pedido.setEstado(new Enviado());
     }
 
     @Override

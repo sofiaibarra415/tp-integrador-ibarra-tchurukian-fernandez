@@ -3,49 +3,44 @@ package ecommerce.pedido;
 import ecommerce.catalogo1.Item;
 
 public abstract class EstadoPedido {
-	protected Pedido pedido;
-	
-	public EstadoPedido(Pedido p){
-		this.pedido = p;
-	}
-	
-	public void confirmar() {
+
+	public void confirmar(Pedido pedido) {
 		throw new OperacionInvalidaException(
 			    "Operación inválida en estado " + getNombreEstado()
 		);
 	}
-	
-	public void cancelar() {
+
+	public void cancelar(Pedido pedido) {
 		throw new OperacionInvalidaException(
 			    "Operación inválida en estado " + getNombreEstado()
 		);
 	}
-	
-	public void iniciarPreparacion() {
+
+	public void iniciarPreparacion(Pedido pedido) {
 		throw new OperacionInvalidaException(
 			    "Operación inválida en estado " + getNombreEstado()
 		);
 	}
-	
-	public void enviar() {
+
+	public void enviar(Pedido pedido) {
 		throw new OperacionInvalidaException(
 			    "Operación inválida en estado " + getNombreEstado()
 		);
 	}
-	
-	public void entregar() {
+
+	public void entregar(Pedido pedido) {
 		throw new OperacionInvalidaException(
 			    "Operación inválida en estado " + getNombreEstado()
 		);
 	}
-	
-	public void agregarItem(Item i) {
+
+	public void agregarItem(Pedido pedido, Item i) {
 		throw new OperacionInvalidaException(
 			    "Operación inválida en estado " + getNombreEstado()
 		);
 	}
-	
-	public void quitarItem(Item i) {
+
+	public void quitarItem(Pedido pedido, Item i) {
 		throw new OperacionInvalidaException(
 			    "Operación inválida en estado " + getNombreEstado()
 		);
