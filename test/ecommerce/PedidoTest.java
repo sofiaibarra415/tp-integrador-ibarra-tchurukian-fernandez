@@ -1,4 +1,4 @@
-package eccomerce;
+package ecommerce;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -23,7 +23,7 @@ class PedidoTest {
 
 	private Pedido pedido;
     private Item item;
-   
+
     @BeforeEach
     void setUp() {
         pedido = new Pedido("PED-001");
@@ -32,26 +32,26 @@ class PedidoTest {
         when(item.getPrecioFinal()).thenReturn(100.0);
         pedido.setMetodoEnvio(envioMock);
     }
-    
+
     @Test
     void unPedidoNuevoEstaEnBorrador() {
         assertEquals("BORRADOR", pedido.getEstado().getNombreEstado());
     }
-    
+
     @Test
     void alConfirmarElPedidoCambiaAConfirmado() {
         pedido.agregarItem(item);
         pedido.confirmar();
         assertEquals("CONFIRMADO", pedido.getEstado().getNombreEstado());
     }
-    
+
     @Test
     void alConfirmarSeDecrementaElStockDeLoItems() {
         pedido.agregarItem(item);
         pedido.confirmar();
         verify(item).decrementarStock();
     }
-    
+
     @Test
     void flujoCompletoHastaEntregado() {
         pedido.agregarItem(item);
@@ -61,7 +61,7 @@ class PedidoTest {
         pedido.entregar();
         assertEquals("ENTREGADO", pedido.getEstado().getNombreEstado());
     }
-    
+
     @Test
     void alCancelarDesdeBorradorCambiaACancelado() {
         pedido.cancelar();
@@ -75,7 +75,7 @@ class PedidoTest {
         pedido.cancelar();
         verify(item).incrementarStock();
     }
-    
+
     @Test
     void alCancelarDesdeEnviadoSoloReembolsaProductos() {
         pedido.agregarItem(item);
@@ -83,25 +83,25 @@ class PedidoTest {
         pedido.iniciarPreparacion();
         pedido.enviar();
         pedido.cancelar();
-        
+
         assertEquals("CANCELADO", pedido.getEstado().getNombreEstado());
         assertEquals(100.0, pedido.getNotaDeCredito().getMonto());
     }
-    
+
     @Test
     void confirmarUnPedidoYaConfirmadoLanzaExcepcion() {
         pedido.agregarItem(item);
         pedido.confirmar();
         assertThrows(OperacionInvalidaException.class, () -> pedido.confirmar());
     }
-    
+
     @Test
     void agregarItemDesdeConfirmadoLanzaExcepcion() {
         pedido.agregarItem(item);
         pedido.confirmar();
         assertThrows(OperacionInvalidaException.class, () -> pedido.agregarItem(item));
     }
-    
+
     @Test
     void enviarDesdeBorradorLanzaExcepcion() {
         assertThrows(OperacionInvalidaException.class, () -> pedido.enviar());
@@ -113,7 +113,7 @@ class PedidoTest {
         pedido.confirmar();
         assertThrows(OperacionInvalidaException.class, () -> pedido.quitarItem(item));
     }
-    
+
     @Test
     void iniciarPreparacionDesdeBorradorLanzaExcepcion() {
         assertThrows(OperacionInvalidaException.class, () -> pedido.iniciarPreparacion());
@@ -123,7 +123,7 @@ class PedidoTest {
     void entregarDesdeBorradorLanzaExcepcion() {
         assertThrows(OperacionInvalidaException.class, () -> pedido.entregar());
     }
-    
+
     @Test
     void cancelarDesdeEntregadoLanzaExcepcion() {
         pedido.agregarItem(item);
@@ -133,14 +133,14 @@ class PedidoTest {
         pedido.entregar();
         assertThrows(OperacionInvalidaException.class, () -> pedido.cancelar());
     }
-    
+
     @Test
     void quitarItemDesdeBorradorLoQuita() {
         pedido.agregarItem(item);
         pedido.quitarItem(item);
         assertEquals(0, pedido.getItems().size());
     }
-    
+
     @Test
     void pedidoEnPreparacionTieneEstadoCorrecto() {
         pedido.agregarItem(item);
@@ -148,7 +148,7 @@ class PedidoTest {
         pedido.iniciarPreparacion();
         assertEquals("EN_PREPARACION", pedido.getEstado().getNombreEstado());
     }
-    
+
     @Test
     void pedidoEnviadoTieneEstadoCorrecto() {
         pedido.agregarItem(item);
@@ -157,14 +157,14 @@ class PedidoTest {
         pedido.enviar();
         assertEquals("ENVIADO", pedido.getEstado().getNombreEstado());
     }
-    
+
     @Test
     void confirmarSinMetodoEnvioLanzaExcepcion() {
         Pedido pedidoSinEnvio = new Pedido("PED-002");
         pedidoSinEnvio.agregarItem(item);
         assertThrows(OperacionInvalidaException.class, () -> pedidoSinEnvio.confirmar());
     }
-    
+
     @Test
     void alCancelarDesdeEnPreparacionSeReembolsaTotal() {
         pedido.agregarItem(item);
@@ -183,7 +183,7 @@ class PedidoTest {
         assertNotNull(pedido.getNotaDeCredito());
         assertEquals(100.0, pedido.getNotaDeCredito().getMonto());
     }
-    
+
     @Test
     void notaDeCreditoTieneIdYFecha() {
         pedido.agregarItem(item);

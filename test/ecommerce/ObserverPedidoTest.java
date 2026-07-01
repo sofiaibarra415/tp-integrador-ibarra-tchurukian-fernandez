@@ -1,4 +1,4 @@
-package eccomerce;
+package ecommerce;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -85,7 +85,7 @@ class ObserverPedidoTest {
         // confirmar envió 1 mail, iniciarPreparacion no debe enviar más
         verify(mailSenderMock, times(1)).enviarMail(any(), any(), any(), any());
     }
-    
+
     @Test
     void alDesuscribirUnObserverYaNoRecibeNotificaciones() {
         pedido.agregarItem(item);
@@ -93,7 +93,7 @@ class ObserverPedidoTest {
         pedido.confirmar();
         verify(mailSenderMock, never()).enviarMail(any(), any(), any(), any());
     }
-    
+
     @Test
     void generadorFacturaActuaAlEntregar() {
         Pedido pedidoMock = mock(Pedido.class);

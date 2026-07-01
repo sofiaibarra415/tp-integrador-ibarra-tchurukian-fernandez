@@ -1,4 +1,4 @@
-package eccomerce;
+package ecommerce;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -35,14 +35,14 @@ class MetodoEnvioTest {
         when(expressMock.calcularCosto(anyFloat())).thenReturn(15.0f);
         when(correoMock.estimarEnvio(anyFloat(), any())).thenReturn(20.0f);
     }
-    
+
     @Test
     void envioExpressCalculaCostoCorrectamente() {
         pedido.agregarItem(item);
         pedido.setMetodoEnvio(new EnvioExpress(expressMock));
         assertEquals(15.0, pedido.calcularCostoEnvio());
     }
-    
+
     @Test
     void envioEstandarCalculaCostoCorrectamente() {
         pedido.agregarItem(item);  // item pesa 2.0
@@ -50,7 +50,7 @@ class MetodoEnvioTest {
         pedido.setMetodoEnvio(new EnvioEstandar(dir, correoMock));
         assertEquals(20.0, pedido.calcularCostoEnvio()); // 2.0 * 10 = 20.0
     }
-    
+
     @Test
     void envioExpressEstimaUnDia() {
         assertEquals(1, new EnvioExpress(expressMock).estimarDias());
@@ -74,7 +74,7 @@ class MetodoEnvioTest {
         Sucursal sucursal = new Sucursal("Sucursal Norte", false);
         assertEquals(3, new RetiroEnSucursal(sucursal).estimarDias());
     }
-    
+
     @Test
     void direccionDevuelveSuValor() {
         Direccion dir = new Direccion("Calle Falsa 123");
