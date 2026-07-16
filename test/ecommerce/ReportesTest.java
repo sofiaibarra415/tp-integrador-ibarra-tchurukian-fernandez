@@ -48,13 +48,25 @@ class ReportesTest {
         assertTrue(resultado.contains("ProductoA"));
         assertTrue(resultado.contains("2"));
     }
-
+    
     @Test
-    void reporteCSVMuestraPrecioPromedioCorrectamente() {
+    void reporteCSVMuestraPrecioPromedioDeProductoCorrectamente() {
         productoA.registrarVenta();
         ReporteCSVVisitor reporte = new ReporteCSVVisitor(inicio, fin);
         productoA.accept(reporte);
-        assertTrue(reporte.getResultado().contains("100.00"));
+        assertTrue(reporte.getResultado().contains("ProductoA;1;100.00"));
+    }
+    
+    @Test
+    void reporteCSVMuestraPrecioPromedioDePaqueteCorrectamente() {
+    	ArrayList<Item> items = new ArrayList<>();
+        items.add(productoA);
+        items.add(productoB);
+        Paquete paquete = new Paquete("PaqueteX", "desc", "cat", 0, items);
+        paquete.registrarVenta();
+        ReporteCSVVisitor reporte = new ReporteCSVVisitor(inicio, fin);
+        paquete.accept(reporte);
+        assertTrue(reporte.getResultado().contains("PaqueteX;1;300.00"));
     }
 
     @Test
@@ -127,6 +139,19 @@ class ReportesTest {
         productoA.accept(reporte);
         assertTrue(reporte.getResultado().contains("Unidades: 0"));
     }
+    
+    @Test
+    void reporteTextoMuestraPrecioPromedioDePaqueteCorrectamente() {
+    	ArrayList<Item> items = new ArrayList<>();
+        items.add(productoA);
+        items.add(productoB);
+        Paquete paquete = new Paquete("PaqueteX", "desc", "cat", 0, items);
+        paquete.registrarVenta();
+        ReporteTextoPlanoVisitor reporte = new ReporteTextoPlanoVisitor(inicio, fin);
+        paquete.accept(reporte);
+        System.out.println(reporte.getResultado());
+        assertTrue(reporte.getResultado().contains("Precio Promedio Cobrado: $300.00"));
+    }
 
     // --- HTML ---
 
@@ -167,5 +192,19 @@ class ReportesTest {
         productoB.accept(reporte);
         String resultado = reporte.getResultado();
         assertTrue(resultado.indexOf("ProductoB") < resultado.indexOf("ProductoA"));
+    }
+    
+    @Test
+    void reporteHTMLMuestraPrecioPromedioCorrectamente() {
+    	ArrayList<Item> items = new ArrayList<>();
+        items.add(productoA);
+        items.add(productoB);
+        Paquete paquete = new Paquete("PaqueteX", "desc", "cat", 0, items);
+        paquete.registrarVenta();
+        ReporteHTMLVisitor reporte = new ReporteHTMLVisitor(inicio, fin);
+        paquete.accept(reporte);
+        String resultado = reporte.getResultado();
+        assertTrue(resultado.contains("<td>PaqueteX</td>"));
+        assertTrue(resultado.contains("<td>$300.00</td>"));
     }
 }
