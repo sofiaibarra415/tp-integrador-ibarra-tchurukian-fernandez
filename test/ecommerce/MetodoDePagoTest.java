@@ -94,42 +94,6 @@ class MetodoDePagoTest {
 		assertTrue(reg.getCantidadIds() == 0); // nunca llega a registrar
 	}
 	
-	@Test
-	void lanzaExcepcion_CuandoTipoDeDatosDeTarjetaEsInvalido() {
-		DatosBilleteraVirtual datos = new DatosBilleteraVirtual(100.00, "usuario123");
-		
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-        	tarjeta.procesarPago(datos, 100.00);
-        });
-        
-        assertTrue(exception.getMessage().contains("Datos inválidos"));
-	}
-	
-	@Test
-	void lanzaExcepcion_CuandoTipoDeDatosDeTransferenciaEsInvalido() {
-		DatosBilleteraVirtual datos = new DatosBilleteraVirtual(100.00, "usuario123");
-		
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-        	transferencia.procesarPago(datos, 100.00);
-        });
-        
-        assertTrue(exception.getMessage().contains("Datos inválidos"));
-	}
-	
-	@Test
-	void lanzaExcepcion_CuandoTipoDeDatosDeBilleteraEsInvalido() {
-		DatosTarjetaCredito datos = new DatosTarjetaCredito(
-                "1234567812345678", "123", YearMonth.of(2035, 12)
-        );
-		
-		Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-        	billetera.procesarPago(datos, 100.00);
-        });
-        
-        assertTrue(exception.getMessage().contains("Datos inválidos"));
-	}
-	
-	
 	//tests clases de datos
 	
 	@Test
